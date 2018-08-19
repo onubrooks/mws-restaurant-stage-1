@@ -284,6 +284,17 @@ nav h1 a {
   color: #666;
 }
 
+.inside nav {
+    height: auto;
+  }
+
+.inside header {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
 /*
 * my breakpoints
 */
@@ -322,13 +333,6 @@ nav h1 a {
     border-color: #fff;
   }
 
-  .inside header {
-    position: fixed;
-    top: 0;
-    width: 100%;
-    z-index: 1000;
-  }
-
   .inside #map-container {
     background: blue none repeat scroll 0 0;
     height: 87%;
@@ -350,4 +354,36 @@ nav h1 a {
   #restaurant-container, #reviews-container {
     width: 50%;
   }
+}
+
+/*
+* add styles for focused and hover elements
+*/
+
+/* button:focus {
+  outline: 0;
+  box-shadow: 0 0 8px rgba(225, 225, 225, 0.8);
+} */
+
+select:hover, select:focus {
+  background: rgb(115, 217, 245);
+  color: #FFF;
+  text-decoration: underline;
+}
+
+a:hover, a:focus {
+  background: rgb(172, 212, 238);
+  color: #000;
+  text-decoration: underline;
+}
+
+#restaurants-list li a:hover, #restaurants-list li a:focus {
+  background: rgb(202, 238, 172);
+  color: #000;
+  text-decoration: underline;
+}
+
+#map:focus {
+  outline: 0;
+  box-shadow: 2px 2px 3px 3px #5B9DD9;
 }
