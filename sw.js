@@ -1,4 +1,4 @@
-let staticCacheName = 'mws-rest-stage1-v1';
+let staticCacheName = 'mws-rest-stage1-v2';
 let urlsToCache = [
   "/",
   "/restaurant.html?id=1",

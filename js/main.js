@@ -166,10 +166,10 @@ createRestaurantHTML = (restaurant) => {
   // add srcset info
   image.srcset = `/img/${restaurant.photograph} 800w, /img/${restaurant.photograph.slice(0, -4)}-400.jpg 400w`; // alternatively use str.replace(a, b)
   // add alt attribute to the image
-  image.alt = "A view inside this restaurant";
+  image.alt = "Image of the restaurant " + restaurant.name;
   li.append(image);
 
-  const name = document.createElement('h1');
+  const name = document.createElement('h2');
   name.innerHTML = restaurant.name;
   li.append(name);
 
@@ -184,9 +184,10 @@ createRestaurantHTML = (restaurant) => {
   const more = document.createElement('a');
   more.innerHTML = 'View Details';
   more.href = DBHelper.urlForRestaurant(restaurant);
-  li.append(more)
+  more.setAttribute("aria-label", "View details of the restaurant " + restaurant.name);
+  li.append(more);
 
-  return li
+  return li;
 }
 
 /**
