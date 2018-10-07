@@ -20,22 +20,15 @@ class DBHelper {
   }
 
   static fromAPI(endpoint, callback) {
-    let xhr = new XMLHttpRequest();
-    xhr.open("GET", endpoint);
-    xhr.onload = () => {
-      if (xhr.status === 200) {
-        // Got a success response from server!
-        const json = JSON.parse(xhr.responseText);
-        console.log("fromAPI returns", json);
-        DBHelper.savePair(endpoint, json);
-        callback(null, json);
-      } else {
-        // Oops!. Got an error from server.
-        const error = `Request failed. Returned status of ${xhr.status}`;
-        callback(error, null);
-      }
-    };
-    xhr.send();
+
+    fetch(endpoint).then((res) => res.json()).then((data) => {
+      console.log("fromAPI returns", data);
+      DBHelper.savePair(endpoint, data);
+      callback(null, data);
+    }).catch((error) => {
+      const err = `Request failed. Returned status of ${error}`;
+      callback(err, null);
+    });
   }
 
   static showStoredPair(endpoint) {
