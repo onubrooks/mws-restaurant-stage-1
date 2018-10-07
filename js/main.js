@@ -164,7 +164,7 @@ createRestaurantHTML = (restaurant) => {
   // add sizes info
   image.sizes = "(min-width: 900px) 30vw, (min-width: 700px) 45vw, (min-width: 450px) 80vw, 100vw";
   // add srcset info
-  image.srcset = `/img/${restaurant.photograph} 800w, /img/${restaurant.photograph.slice(0, -4)}-400.jpg 400w`; // alternatively use str.replace(a, b)
+  image.srcset = `/img/${restaurant.photograph}.jpg 800w, /img/${restaurant.photograph}-400.jpg 400w`; // alternatively use str.replace(a, b)
   // add alt attribute to the image
   image.alt = "Image of the restaurant " + restaurant.name;
   li.append(image);
