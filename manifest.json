@@ -3,14 +3,14 @@
   "name": "Restaurant Reviews App",
   "icons": [
     {
-      "src": "/img/icon1.png",
+      "src": "/img/icon4.png",
       "type": "image/png",
-      "sizes": "224x225"
+      "sizes": "512x512"
     },
     {
-      "src": "/images/icon2.png",
+      "src": "/img/icon3.png",
       "type": "image/png",
-      "sizes": "256x256"
+      "sizes": "512x512"
     }
   ],
   "start_url": "/?source=pwa",

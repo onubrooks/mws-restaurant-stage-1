@@ -1,4 +1,4 @@
-let staticCacheName = 'mws-rest-stage1-v2';
+let staticCacheName = 'mws-rest-stage1-v3';
 let urlsToCache = [
   "/",
   "/restaurant.html?id=1",
@@ -36,8 +36,7 @@ let urlsToCache = [
   "/img/10.jpg",
   "/img/10-400.jpg",
   "https://unpkg.com/leaflet@1.3.1/dist/leaflet.js",
-  "https://unpkg.com/leaflet@1.3.1/dist/leaflet.css",
-  "http://localhost:8000/data/restaurants.json"
+  "https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
 ]; 
 let allCaches = [
   staticCacheName
