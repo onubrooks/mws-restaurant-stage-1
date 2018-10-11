@@ -28,5 +28,12 @@ This repository uses [leafletjs](https://leafletjs.com/) with [Mapbox](https://w
 
 Most of the code in this project has been written to the ES6 JavaScript specification for compatibility with modern web browsers and future proofing JavaScript code. As much as possible, try to maintain use of ES6 in any additional JavaScript you write. 
 
+### how to run the project
+
+1. Open a terminal and run your python server with the following command: `python3 -m http.server 8000`.
+
+2. Open another terminal and run the node server that serves as endpoints for retrieving data that the app uses. Run the following command to start the node server: `node server`. Make sure you have node installed and sails.js as well.
+
+3. In your browser, visit `localhost:8000`.
 
 

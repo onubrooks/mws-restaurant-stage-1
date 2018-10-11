@@ -247,7 +247,7 @@ nav h1 a {
   flex-direction: column;
   align-items: center;
 }
-#reviews-container h2 {
+#reviews-container h3 {
   color: #f58500;
   font-size: 24pt;
   font-weight: 300;
