@@ -1,5 +1,5 @@
-<!DOCTYPE html lang="en">
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -45,6 +45,50 @@
     </section>
     <!-- end restaurant -->
     <!-- Beginning reviews -->
+    <section id="reviews-form">
+      <h2>Leave your own review here.</h2>
+      <form action="#" class="modal-content" id="submitReviewForm" >
+        <div class="row">
+          <div class="col-25">
+            <label for="fname">Name</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="fname" name="firstname" placeholder="Your name..">
+          </div>
+        </div>
+        <!-- <div class="row">
+          <div class="col-25">
+            <label for="lname">Last Name</label>
+          </div>
+          <div class="col-75">
+            <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+          </div>
+        </div> -->
+        <div class="row">
+          <div class="col-25">
+            <label for="rating">Rating(1 to 5)</label>
+          </div>
+          <div class="col-75">
+            <input type="number" id="rating" name="rating" placeholder="Your rating.."></textarea>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label for="comment">Comment</label>
+          </div>
+          <div class="col-75">
+            <textarea id="comment" name="comment" placeholder="Write something.."></textarea>
+          </div>
+        </div>
+        <div role="timer" class="row" style="display: none">
+          <img id="loadingIndicator" src="/img/loader.gif">
+        </div>
+        <div class="row">
+          <button class="btn" id="submitReview" type="button">SUBMIT</button>
+        </div>
+      </form>
+
+    </section>
     <section id="reviews-container">
       <ul id="reviews-list"></ul>
     </section>
@@ -70,6 +114,38 @@
   <script type="text/javascript" src="js/dbhelper.js"></script>
   <!-- Main javascript file -->
   <script type="text/javascript" src="js/restaurant_info.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function () {
+        navigator.serviceWorker.register('/sw.js')
+          .then(reg => console.log('SW registered!', reg))
+          .catch(err => console.log('Error!', err));
+      });
+    }
+
+    let deferredPrompt;
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('install prompt event');
+        // Prevent Chrome 67 and earlier from automatically showing the prompt
+        e.preventDefault();
+        // Stash the event so it can be triggered later.
+        deferredPrompt = e;
+
+        // Show the prompt
+        deferredPrompt.prompt();
+        // Wait for the user to respond to the prompt
+        deferredPrompt.userChoice
+          .then((choiceResult) => {
+            if (choiceResult.outcome === 'accepted') {
+              console.log('User accepted the A2HS prompt');
+            } else {
+              console.log('User dismissed the A2HS prompt');
+            }
+            deferredPrompt = null;
+          });
+      });
+  </script>
   <!-- Google Maps -->
  <!--  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA_tKbW6A5pQ-eupxI56myUnHLqYCzOjKo&libraries=places&callback=initMap"></script> -->
   <!-- End scripts -->

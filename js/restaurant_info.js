@@ -135,23 +135,26 @@ fillRestaurantHoursHTML = (operatingHours = self.restaurant.operating_hours) => 
 /**
  * Create all reviews HTML and add them to the webpage.
  */
-fillReviewsHTML = (reviews = self.restaurant.reviews) => {
+fillReviewsHTML = () => {
   const container = document.getElementById('reviews-container');
   const title = document.createElement('h3');
   title.innerHTML = 'Reviews';
   container.appendChild(title);
 
-  if (!reviews) {
-    const noReviews = document.createElement('p');
-    noReviews.innerHTML = 'No reviews yet!';
-    container.appendChild(noReviews);
-    return;
-  }
-  const ul = document.getElementById('reviews-list');
-  reviews.forEach(review => {
-    ul.appendChild(createReviewHTML(review));
-  });
-  container.appendChild(ul);
+  const id = getParameterByName("id");
+  DBHelper.fetchRestaurantReviews((error, reviews) => {
+    if (!reviews) {
+      const noReviews = document.createElement("p");
+      noReviews.innerHTML = "No reviews yet!";
+      container.appendChild(noReviews);
+      return;
+    }
+    const ul = document.getElementById("reviews-list");
+    reviews.forEach(review => {
+      ul.appendChild(createReviewHTML(review));
+    });
+    container.appendChild(ul);
+  }, id);
 }
 
 /**
@@ -164,7 +167,7 @@ createReviewHTML = (review) => {
   li.appendChild(name);
 
   const date = document.createElement('p');
-  date.innerHTML = review.date;
+  date.innerHTML = new Date(review.createdAt).toDateString();
   li.appendChild(date);
 
   const rating = document.createElement('p');
@@ -203,3 +206,26 @@ getParameterByName = (name, url) => {
     return '';
   return decodeURIComponent(results[2].replace(/\+/g, ' '));
 }
+
+submitReview = () => {
+  const restaurant_id = getParameterByName('id');
+  const form = document.getElementById("submitReviewForm");
+  let name = form.elements[0].value;
+  let rating = form.elements[1].value;
+  let comments = form.elements[2].value;
+  DBHelper.saveRestaurantReview({ restaurant_id, name, rating, comments }, (error, review) => {
+    if (!review) {
+      alert(error)
+    } else {
+      alert('successfully saved review');
+      // reset the form
+      form.elements[0].value = '';
+      form.elements[1].value = '';
+      form.elements[2].value = '';
+      // create html and add the newly created review to the page
+      const ul = document.getElementById("reviews-list");
+      ul.appendChild(createReviewHTML(review));
+    }
+  });
+}
+document.getElementById("submitReview").addEventListener('click', submitReview);
